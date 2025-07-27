@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  controller1:
+    hostname: controller1
+    container_name: controller1
+    image: confluentinc/cp-server:7.7.1
+    ports:
+      - "29095:9093"
+    environment:
+      KAFKA_NODE_ID: 101
+      KAFKA_PROCESS_ROLES: 'controller'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '101@controller1:9093,102@controller2:9093,103@controller3:9093'
+      KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT'
+      KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
+      KAFKA_LISTENERS: 'CONTROLLER://controller1:9093'
+      CLUSTER_ID: 'MkU3OEVBNTcwNTJENDM2Qk'
+      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: 'broker1:29092,broker2:39092,broker3:49092'
+      KAFKA_CONFLUENT_SCHEMA_REGISTRY_URL: 'http://schema-registry1:8081,http://schema-registry2:8081'
+
+  controller2:
+    hostname: controller2
+    container_name: controller2
+    image: confluentinc/cp-server:7.7.1
+    ports:
+      - "29096:9093"
+    environment:
+      KAFKA_NODE_ID: 102
+      KAFKA_PROCESS_ROLES: 'controller'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '101@controller1:9093,102@controller2:9093,103@controller3:9093'
+      KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT'
+      KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
+      KAFKA_LISTENERS: 'CONTROLLER://controller2:9093'
+      CLUSTER_ID: 'MkU3OEVBNTcwNTJENDM2Qk'
+      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: 'broker1:29092,broker2:39092,broker3:49092'
+      KAFKA_CONFLUENT_SCHEMA_REGISTRY_URL: 'http://schema-registry1:8081,http://schema-registry2:8081'
+
+  controller3:
+    hostname: controller3
+    container_name: controller3
+    image: confluentinc/cp-server:7.7.1
+    ports:
+      - "29097:9093"
+    environment:
+      KAFKA_NODE_ID: 103
+      KAFKA_PROCESS_ROLES: 'controller'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '101@controller1:9093,102@controller2:9093,103@controller3:9093'
+      KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT'
+      KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
+      KAFKA_LISTENERS: 'CONTROLLER://controller3:9093'
+      CLUSTER_ID: 'MkU3OEVBNTcwNTJENDM2Qk'
+      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: 'broker1:29092,broker2:39092,broker3:49092'
+      KAFKA_CONFLUENT_SCHEMA_REGISTRY_URL: 'http://schema-registry1:8081,http://schema-registry2:8081'
