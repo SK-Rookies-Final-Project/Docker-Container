@@ -16,19 +16,23 @@ docker-compose -f ../inventory/docker-compose-br.yml up -d
 
 # Broker가 완전히 시작될 때까지 대기
 echo "Broker 노드 초기화 대기 중..."
-sleep 15
+sleep 10
 
 echo "3. Schema Registry 시작..."
 docker-compose -f ../inventory/docker-compose-sr.yml up -d
+sleep 10
 
 echo "4. Kafka Connect 시작..."
 docker-compose -f ../inventory/docker-compose-cw.yml up -d
+sleep 10
 
 echo "5. ksqlDB 시작..."
 docker-compose -f ../inventory/docker-compose-db.yml up -d
+sleep 10
 
 echo "6. Control Center 시작..."
 docker-compose -f ../inventory/docker-compose-c3.yml up -d
+sleep 10
 
 echo "모든 서비스가 시작되었습니다!"
 echo "Control Center: http://localhost:9021"

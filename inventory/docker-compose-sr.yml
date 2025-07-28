@@ -1,5 +1,10 @@
 version: '3.8'
 
+networks:
+  kafka-network:
+    external: true
+    name: kafka-network
+
 services:
   schema-registry1:
     image: confluentinc/cp-schema-registry:7.7.1
@@ -32,8 +37,3 @@ services:
       SCHEMA_REGISTRY_KAFKASTORE_TOPIC_REPLICATION_FACTOR: 3
     networks:
       - kafka-network
-
-networks:
-  kafka-network:
-    external: true
-    name: kafka-network
