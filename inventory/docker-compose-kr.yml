@@ -20,19 +20,21 @@ services:
       KAFKA_CONTROLLER_QUORUM_VOTERS: '101@controller1:9093,102@controller2:9093,103@controller3:9093'
       KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT'
       KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
-      KAFKA_LISTENERS: 'CONTROLLER://controller1:9093'
+      KAFKA_LISTENERS: 'CONTROLLER://0.0.0.0:9093'
       CLUSTER_ID: 'MkU3OEVBNTcwNTJENDM2Qk'
-      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: 'broker1:29092,broker2:39092,broker3:49092'
-      KAFKA_CONFLUENT_SCHEMA_REGISTRY_URL: 'http://schema-registry1:8081,http://schema-registry2:8081'
-      # 타임아웃 설정 추가
+      # 타임아웃 설정
       KAFKA_CONTROLLER_SOCKET_TIMEOUT_MS: 40000
       KAFKA_REQUEST_TIMEOUT_MS: 40000
+      # 추가 안정성 설정
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
     healthcheck:
-      test: ["CMD", "nc", "-z", "localhost", "9093"]
-      interval: 5s
+      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:9093"]
+      interval: 10s
       timeout: 10s
       retries: 10
-      start_period: 30s
+      start_period: 60s
     restart: unless-stopped
 
   controller2:
@@ -49,18 +51,19 @@ services:
       KAFKA_CONTROLLER_QUORUM_VOTERS: '101@controller1:9093,102@controller2:9093,103@controller3:9093'
       KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT'
       KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
-      KAFKA_LISTENERS: 'CONTROLLER://controller2:9093'
+      KAFKA_LISTENERS: 'CONTROLLER://0.0.0.0:9093'
       CLUSTER_ID: 'MkU3OEVBNTcwNTJENDM2Qk'
-      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: 'broker1:29092,broker2:39092,broker3:49092'
-      KAFKA_CONFLUENT_SCHEMA_REGISTRY_URL: 'http://schema-registry1:8081,http://schema-registry2:8081'
       KAFKA_CONTROLLER_SOCKET_TIMEOUT_MS: 40000
       KAFKA_REQUEST_TIMEOUT_MS: 40000
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
     healthcheck:
-      test: ["CMD", "nc", "-z", "localhost", "9093"]
-      interval: 5s
+      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:9093"]
+      interval: 10s
       timeout: 10s
       retries: 10
-      start_period: 30s
+      start_period: 60s
     restart: unless-stopped
 
   controller3:
@@ -77,16 +80,17 @@ services:
       KAFKA_CONTROLLER_QUORUM_VOTERS: '101@controller1:9093,102@controller2:9093,103@controller3:9093'
       KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT'
       KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
-      KAFKA_LISTENERS: 'CONTROLLER://controller3:9093'
+      KAFKA_LISTENERS: 'CONTROLLER://0.0.0.0:9093'
       CLUSTER_ID: 'MkU3OEVBNTcwNTJENDM2Qk'
-      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: 'broker1:29092,broker2:39092,broker3:49092'
-      KAFKA_CONFLUENT_SCHEMA_REGISTRY_URL: 'http://schema-registry1:8081,http://schema-registry2:8081'
       KAFKA_CONTROLLER_SOCKET_TIMEOUT_MS: 40000
       KAFKA_REQUEST_TIMEOUT_MS: 40000
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
     healthcheck:
-      test: ["CMD", "nc", "-z", "localhost", "9093"]
-      interval: 5s
+      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:9093"]  
+      interval: 10s
       timeout: 10s
       retries: 10
-      start_period: 30s
+      start_period: 60s
     restart: unless-stopped
