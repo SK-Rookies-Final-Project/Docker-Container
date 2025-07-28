@@ -37,3 +37,5 @@ echo "Schema Registry 1: http://localhost:18081"
 echo "Schema Registry 2: http://localhost:18082"
 echo "Kafka Connect 1: http://localhost:18083"
 echo "Kafka Connect 2: http://localhost:18084"
+
+sudo systemctl start docker
