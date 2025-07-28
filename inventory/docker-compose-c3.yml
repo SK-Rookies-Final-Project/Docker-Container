@@ -1,5 +1,10 @@
 version: '3.8'
 
+networks:
+  kafka-network:
+    external: true
+    name: kafka-network
+
 services:
   control-center:
     image: confluentinc/cp-enterprise-control-center:7.7.1
@@ -7,6 +12,8 @@ services:
     container_name: control-center
     ports:
       - "9021:9021"
+    networks:
+      - kafka-network
     environment:
       CONTROL_CENTER_BOOTSTRAP_SERVERS: 'broker1:29092,broker2:39092,broker3:49092'
       CONTROL_CENTER_CONNECT_CONNECT-DEFAULT_CLUSTER: 'kafka-connect1:8083,kafka-connect2:8083'
@@ -25,10 +32,4 @@ services:
       CONTROL_CENTER_USAGE_DATA_COLLECTION_ENABLE: false
       CONTROL_CENTER_COMMAND_TOPIC: '_confluent-command'
       CONTROL_CENTER_COMMAND_TOPIC_REPLICATION: 3
-  networks:
-      - kafka-network
-
-networks:
-  kafka-network:
-    external: true
-    name: kafka-network
+    restart: unless-stopped

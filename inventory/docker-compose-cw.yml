@@ -1,5 +1,10 @@
 version: '3.8'
 
+networks:
+  kafka-network:
+    external: true
+    name: kafka-network
+
 services:
   kafka-connect1:
     image: confluentinc/cp-kafka-connect:7.7.1
@@ -7,6 +12,8 @@ services:
     container_name: kafka-connect1
     ports:
       - "18083:8083"
+    networks:
+      - kafka-network
     environment:
       CONNECT_BOOTSTRAP_SERVERS: 'broker1:29092,broker2:39092,broker3:49092'
       CONNECT_REST_ADVERTISED_HOST_NAME: kafka-connect1
@@ -29,14 +36,12 @@ services:
       CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry1:8081,http://schema-registry2:8081
       CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
       CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry1:8081,http://schema-registry2:8081
-      # CLASSPATH required due to CC-2422
       CLASSPATH: /usr/share/java/monitoring-interceptors/monitoring-interceptors-7.7.1.jar
       CONNECT_PRODUCER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringProducerInterceptor"
       CONNECT_CONSUMER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor"
       CONNECT_PLUGIN_PATH: "/usr/share/java,/usr/share/confluent-hub-components"
       CONNECT_LOG4J_LOGGERS: org.apache.zookeeper=ERROR,org.I0Itec.zkclient=ERROR,org.reflections=ERROR
-  networks:
-      - kafka-network
+    restart: unless-stopped
 
   kafka-connect2:
     image: confluentinc/cp-kafka-connect:7.7.1
@@ -44,6 +49,8 @@ services:
     container_name: kafka-connect2
     ports:
       - "18084:8083"
+    networks:
+      - kafka-network
     environment:
       CONNECT_BOOTSTRAP_SERVERS: 'broker1:29092,broker2:39092,broker3:49092'
       CONNECT_REST_ADVERTISED_HOST_NAME: kafka-connect2
@@ -66,16 +73,9 @@ services:
       CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry1:8081,http://schema-registry2:8081
       CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
       CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry1:8081,http://schema-registry2:8081
-      # CLASSPATH required due to CC-2422
       CLASSPATH: /usr/share/java/monitoring-interceptors/monitoring-interceptors-7.7.1.jar
       CONNECT_PRODUCER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringProducerInterceptor"
       CONNECT_CONSUMER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor"
       CONNECT_PLUGIN_PATH: "/usr/share/java,/usr/share/confluent-hub-components"
       CONNECT_LOG4J_LOGGERS: org.apache.zookeeper=ERROR,org.I0Itec.zkclient=ERROR,org.reflections=ERROR
-  networks:
-      - kafka-network
-
-networks:
-  kafka-network:
-    external: true
-    name: kafka-network
+    restart: unless-stopped
