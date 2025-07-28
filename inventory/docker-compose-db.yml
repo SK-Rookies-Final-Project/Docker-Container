@@ -22,6 +22,8 @@ services:
       KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE: "true"
       KSQL_LOGGING_PROCESSING_TOPIC_PARTITIONS: "2"
       KSQL_CONFLUENT_SUPPORT_METRICS_ENABLE: "false"
+  networks:
+      - kafka-network
 
   ksqldb-cli:
     image: confluentinc/cp-ksqldb-cli:7.7.1
@@ -30,3 +32,10 @@ services:
       - ksqldb
     entrypoint: /bin/sh
     tty: true
+  networks:
+      - kafka-network
+
+networks:
+  kafka-network:
+    external: true
+    name: kafka-network

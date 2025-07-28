@@ -1,5 +1,10 @@
 version: '3.8'
 
+networks:
+  kafka-network:
+    driver: bridge
+    name: kafka-network
+
 services:
   controller1:
     hostname: controller1
@@ -7,6 +12,8 @@ services:
     image: confluentinc/cp-server:7.7.1
     ports:
       - "29095:9093"
+    networks:
+      - kafka-network
     environment:
       KAFKA_NODE_ID: 101
       KAFKA_PROCESS_ROLES: 'controller'
@@ -17,6 +24,16 @@ services:
       CLUSTER_ID: 'MkU3OEVBNTcwNTJENDM2Qk'
       CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: 'broker1:29092,broker2:39092,broker3:49092'
       KAFKA_CONFLUENT_SCHEMA_REGISTRY_URL: 'http://schema-registry1:8081,http://schema-registry2:8081'
+      # 타임아웃 설정 추가
+      KAFKA_CONTROLLER_SOCKET_TIMEOUT_MS: 40000
+      KAFKA_REQUEST_TIMEOUT_MS: 40000
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "9093"]
+      interval: 5s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
+    restart: unless-stopped
 
   controller2:
     hostname: controller2
@@ -24,6 +41,8 @@ services:
     image: confluentinc/cp-server:7.7.1
     ports:
       - "29096:9093"
+    networks:
+      - kafka-network
     environment:
       KAFKA_NODE_ID: 102
       KAFKA_PROCESS_ROLES: 'controller'
@@ -34,6 +53,15 @@ services:
       CLUSTER_ID: 'MkU3OEVBNTcwNTJENDM2Qk'
       CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: 'broker1:29092,broker2:39092,broker3:49092'
       KAFKA_CONFLUENT_SCHEMA_REGISTRY_URL: 'http://schema-registry1:8081,http://schema-registry2:8081'
+      KAFKA_CONTROLLER_SOCKET_TIMEOUT_MS: 40000
+      KAFKA_REQUEST_TIMEOUT_MS: 40000
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "9093"]
+      interval: 5s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
+    restart: unless-stopped
 
   controller3:
     hostname: controller3
@@ -41,6 +69,8 @@ services:
     image: confluentinc/cp-server:7.7.1
     ports:
       - "29097:9093"
+    networks:
+      - kafka-network
     environment:
       KAFKA_NODE_ID: 103
       KAFKA_PROCESS_ROLES: 'controller'
@@ -51,3 +81,12 @@ services:
       CLUSTER_ID: 'MkU3OEVBNTcwNTJENDM2Qk'
       CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: 'broker1:29092,broker2:39092,broker3:49092'
       KAFKA_CONFLUENT_SCHEMA_REGISTRY_URL: 'http://schema-registry1:8081,http://schema-registry2:8081'
+      KAFKA_CONTROLLER_SOCKET_TIMEOUT_MS: 40000
+      KAFKA_REQUEST_TIMEOUT_MS: 40000
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "9093"]
+      interval: 5s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
+    restart: unless-stopped
