@@ -1,10 +1,4 @@
-version: '3.8'
-
-networks:
-  kafka-network:
-    external: true
-    name: kafka-network
-
+version: '2'
 services:
   ksqldb:
     image: confluentinc/cp-ksqldb-server:7.7.1
@@ -12,8 +6,6 @@ services:
     container_name: ksqldb
     ports:
       - "8088:8088"
-    networks:
-      - kafka-network
     environment:
       KSQL_LISTENERS: "http://0.0.0.0:8088"
       KSQL_ADVERTISED_LISTENER: "http://ec2-3-35-199-84.ap-northeast-2.compute.amazonaws.com:8088"
@@ -29,13 +21,10 @@ services:
       KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE: "true"
       KSQL_LOGGING_PROCESSING_TOPIC_PARTITIONS: "2"
       KSQL_CONFLUENT_SUPPORT_METRICS_ENABLE: "false"
-    restart: unless-stopped
 
   ksqldb-cli:
     image: confluentinc/cp-ksqldb-cli:7.7.1
     container_name: ksqldb-cli
-    networks:
-      - kafka-network
     depends_on:
       - ksqldb
     entrypoint: /bin/sh

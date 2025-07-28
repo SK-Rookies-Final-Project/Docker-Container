@@ -1,10 +1,4 @@
-version: '3.8'
-
-networks:
-  kafka-network:
-    external: true
-    name: kafka-network
-
+version: '2'
 services:
   schema-registry1:
     image: confluentinc/cp-schema-registry:7.7.1
@@ -19,8 +13,6 @@ services:
       SCHEMA_REGISTRY_DEBUG: true
       SCHEMA_REGISTRY_KAFKASTORE_TOPIC: '_schemas'
       SCHEMA_REGISTRY_KAFKASTORE_TOPIC_REPLICATION_FACTOR: 3
-    networks:
-      - kafka-network
 
   schema-registry2:
     image: confluentinc/cp-schema-registry:7.7.1
@@ -35,5 +27,3 @@ services:
       SCHEMA_REGISTRY_DEBUG: true
       SCHEMA_REGISTRY_KAFKASTORE_TOPIC: '_schemas'
       SCHEMA_REGISTRY_KAFKASTORE_TOPIC_REPLICATION_FACTOR: 3
-    networks:
-      - kafka-network
