@@ -1,9 +1,16 @@
-version: '2'
+version: '3.8'
+
+networks:
+  kafka-network:
+    driver: bridge
+
 services:
   schema-registry1:
     image: confluentinc/cp-schema-registry:7.7.1
     hostname: schema-registry1
     container_name: schema-registry1
+    networks:
+      - kafka-network
     ports:
       - "18081:8081"
     environment:
@@ -18,6 +25,8 @@ services:
     image: confluentinc/cp-schema-registry:7.7.1
     hostname: schema-registry2
     container_name: schema-registry2
+    networks:
+      - kafka-network
     ports:
       - "18082:8081"
     environment:

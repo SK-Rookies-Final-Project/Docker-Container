@@ -1,14 +1,21 @@
-version: '2'
+version: '3.8'
+
+networks:
+  kafka-network:
+    driver: bridge
+
 services:
   ksqldb:
     image: confluentinc/cp-ksqldb-server:7.7.1
     hostname: ksqldb
     container_name: ksqldb
+    networks:
+      - kafka-network
     ports:
       - "8088:8088"
     environment:
       KSQL_LISTENERS: "http://0.0.0.0:8088"
-      KSQL_ADVERTISED_LISTENER: "http://ec2-3-35-199-84.ap-northeast-2.compute.amazonaws.com:8088"
+      KSQL_ADVERTISED_LISTENER: "http://ksqldb:8088"
       KSQL_BOOTSTRAP_SERVERS: "broker1:29092,broker2:39092,broker3:49092"
       KSQL_SERVICE_ID: "ksql-cluster1"
       CONFLUENT_MONITORING_INTERCEPTOR_BOOTSTRAP_SERVERS: "broker1:29092,broker2:39092,broker3:49092"
@@ -25,6 +32,8 @@ services:
   ksqldb-cli:
     image: confluentinc/cp-ksqldb-cli:7.7.1
     container_name: ksqldb-cli
+    networks:
+      - kafka-network
     depends_on:
       - ksqldb
     entrypoint: /bin/sh

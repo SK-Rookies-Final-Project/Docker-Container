@@ -1,9 +1,16 @@
-version: '1'
+version: '3.8'
+
+networks:
+  kafka-network:
+    driver: bridge
+
 services:
   controller1:
     hostname: controller1
     container_name: controller1
     image: confluentinc/cp-server:7.7.1
+    networks:
+      - kafka-network
     ports:
       - 29095:9093
     environment:
@@ -21,6 +28,8 @@ services:
     hostname: controller2
     container_name: controller2
     image: confluentinc/cp-server:7.7.1
+    networks:
+      - kafka-network
     ports:
       - 29096:9093
     environment:
@@ -38,6 +47,8 @@ services:
     hostname: controller3
     container_name: controller3
     image: confluentinc/cp-server:7.7.1
+    networks:
+      - kafka-network
     ports:
       - 29097:9093
     environment:

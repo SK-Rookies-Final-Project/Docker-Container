@@ -1,16 +1,23 @@
-version: '1'
+version: '3.8'
+
+networks:
+  kafka-network:
+    driver: bridge
+
 services:
   broker1:
     hostname: broker1
     container_name: broker1
     image: confluentinc/cp-server:7.7.1
+    networks:
+      - kafka-network
     ports:
       - 29092:29092
     environment:
       KAFKA_NODE_ID: 1
       KAFKA_PROCESS_ROLES: 'broker'
       KAFKA_LISTENERS: 'PLAINTEXT://0.0.0.0:29092'
-      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://ec2-3-35-199-84.ap-northeast-2.compute.amazonaws.com:29092'
+      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://broker1:29092'
       KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT'
       KAFKA_CONTROLLER_QUORUM_VOTERS: '101@controller1:9093,102@controller2:9093,103@controller3:9093'
       KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
@@ -22,13 +29,15 @@ services:
     hostname: broker2
     container_name: broker2
     image: confluentinc/cp-server:7.7.1
+    networks:
+      - kafka-network
     ports:
       - 39092:39092
     environment:
       KAFKA_NODE_ID: 2
       KAFKA_PROCESS_ROLES: 'broker'
       KAFKA_LISTENERS: 'PLAINTEXT://0.0.0.0:39092'
-      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://ec2-3-35-199-84.ap-northeast-2.compute.amazonaws.com:39092'
+      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://broker2:39092'
       KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT'
       KAFKA_CONTROLLER_QUORUM_VOTERS: '101@controller1:9093,102@controller2:9093,103@controller3:9093'
       KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
@@ -40,13 +49,15 @@ services:
     hostname: broker3
     container_name: broker3
     image: confluentinc/cp-server:7.7.1
+    networks:
+      - kafka-network
     ports:
       - 49092:49092
     environment:
       KAFKA_NODE_ID: 3
       KAFKA_PROCESS_ROLES: 'broker'
       KAFKA_LISTENERS: 'PLAINTEXT://0.0.0.0:49092'
-      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://ec2-3-35-199-84.ap-northeast-2.compute.amazonaws.com:49092'
+      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://broker3:49092'
       KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT'
       KAFKA_CONTROLLER_QUORUM_VOTERS: '101@controller1:9093,102@controller2:9093,103@controller3:9093'
       KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
