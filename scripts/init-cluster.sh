@@ -122,3 +122,14 @@ echo "  - $(docker --version)"
 echo "  - $(docker-compose --version)"
 echo
 log_info "Docker 테스트 명령: docker run hello-world"
+
+
+CREATE TABLE user (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_name VARCHAR(100) NOT NULL,
+    age INT,
+    gender ENUM('M', 'F', 'Other'),
+    phone_number VARCHAR(20),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);

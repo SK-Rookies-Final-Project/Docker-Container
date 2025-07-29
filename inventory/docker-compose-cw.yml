@@ -1,5 +1,4 @@
-version: '3.8'
-
+name: kafka-project
 networks:
   kafka-network:
     driver: bridge
