@@ -1,5 +1,5 @@
 #!/bin/bash
-
+cd /home/appuser/jdbc
 # Kafka Connect 설정 파일 생성 스크립트
 
 # JDBC MySQL Source 커넥터 설정 파일 생성
@@ -9,16 +9,16 @@ cat > jdbc-mysql-source.json << 'EOF'
     "config": {
         "name": "jdbc-mysql-source",
         "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
-        "connection.url": "jdbc:mysql://tg-mysqldb.crg0k08ees5f.ap-northeast-2.rds.amazonaws.com:3306/tgmysqlDB",
+        "connection.url": "jdbc:mysql://192.168.0.135:3306/tgmysqlDB",
         "connection.user": "tgadmin",
-        "connection.password": "tgadmin1!",
+        "connection.password": "tgmaster!",
         "db.timezone": "Asia/Seoul",
         "tasks.max": "1",
         "table.whitelist": "tgmysqlDB.user",
         "key.converter": "io.confluent.connect.avro.AvroConverter",
-        "key.converter.schema.registry.url": "http://3.36.255.131:8081,http://43.203.57.186:8081",
+        "key.converter.schema.registry.url": "http://192.168.0.121:18081,http://192.168.0.121:18081",
         "value.converter": "io.confluent.connect.avro.AvroConverter",
-        "value.converter.schema.registry.url": "http://3.36.255.131:8081,http://43.203.57.186:8081",
+        "value.converter.schema.registry.url": "http://192.168.0.121:18081,http://192.168.0.121:18081",
         "topic.creation.default.partitions": "1",
         "topic.creation.default.replication.factor": "3",
         "topic.prefix": "source-",
@@ -31,8 +31,6 @@ cat > jdbc-mysql-source.json << 'EOF'
 }
 EOF
 
-echo "✅ jdbc-mysql-source.json 파일이 생성되었습니다."
-
 # JDBC PostgreSQL Sink 커넥터 설정 파일 생성
 cat > jdbc-postgre-sink-test.json << 'EOF'
 {
@@ -40,9 +38,9 @@ cat > jdbc-postgre-sink-test.json << 'EOF'
     "config": {
         "name": "jdbc-postgre-sink-test",
         "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
-        "connection.url": "jdbc:postgresql://tg-postgredb.crg0k08ees5f.ap-northeast-2.rds.amazonaws.com:5432/tgpostgreDB",
+        "connection.url": "jdbc:postgresql://192.168.0.135:5432/tgpostgreDB",
         "connection.user": "tgadmin",
-        "connection.password": "tgadmin1!",
+        "connection.password": "tgmaster!",
         "db.timezone": "Asia/Seoul",
         "tasks.max": "1",
         "insert.mode": "upsert",

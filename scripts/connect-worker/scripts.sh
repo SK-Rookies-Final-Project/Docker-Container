@@ -1,9 +1,9 @@
 #!/bin/bash
 
-./jdbc-connector.sh
+sh jdbc-connector.sh
 
-./create-json.sh
+sh create-json.sh
 
-./mysql-connector.sh
+sh mysql-connector.sh
 
-./postgresql-connector.sh
+sh postgresql-connector.sh
