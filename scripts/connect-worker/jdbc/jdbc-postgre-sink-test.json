@@ -1,0 +1,19 @@
+{
+    "name": "jdbc-postgre-sink-test",
+    "config": {
+        "name": "jdbc-postgre-sink-test",
+        "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+        "connection.url": "jdbc:postgresql://192.168.0.135:5432/tgpostgreDB",
+        "connection.user": "tgadmin",
+        "connection.password": "tgmaster!",
+        "db.timezone": "Asia/Seoul",
+        "tasks.max": "1",
+        "insert.mode": "upsert",
+        "pk.mode": "record_key",
+        "pk.fields": "user_id",
+        "table.name.format": "${topic}",
+        "auto.create": "true",
+        "auto.evolve": "true",
+        "topics": "source-user"
+    }
+}

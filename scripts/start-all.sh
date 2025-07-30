@@ -11,7 +11,7 @@ wait_for_kafka() {
 wait_for_kafka_ready() {
   echo "⏳ Waiting for Kafka metadata to be available..."
   until docker exec broker1 kafka-topics --bootstrap-server broker1:29092 --list &>/dev/null; do
-    sleep 2
+    sleep 10
   done
   echo "✅ Kafka metadata is available!"
 }
@@ -30,15 +30,15 @@ wait_for_kafka localhost 49092
 
 wait_for_kafka_ready
 
-sleep 15
 
-echo "✅ Step 3: Starting Schema Registry (schema-registry1, schema-registry2)..."
-docker compose -f ../inventory/docker-compose-sr.yml up -d
-sleep 10
-
-echo "✅ Step 4: Starting Kafka Connect Workers (kafka-connect1, kafka-connect2)..."
+echo "✅ Step 3: Starting Kafka Connect Workers (kafka-connect1, kafka-connect2)..."
 docker compose -f ../inventory/docker-compose-cw.yml up -d
+sleep 20
+
+echo "✅ Step 4: Starting Schema Registry (schema-registry1, schema-registry2)..."
+docker compose -f ../inventory/docker-compose-sr.yml up -d
 sleep 15
+
 
 echo "✅ Step 5: Starting ksqlDB (ksqldb, ksqldb-cli)..."
 docker compose -f ../inventory/docker-compose-db.yml up -d
@@ -61,9 +61,10 @@ wget https://downloads.mysql.com/archives/get/p/3/file/mysql-connector-j_8.4.0-1
 # .deb 패키지 설치
 dpkg -x mysql-connector-j_8.4.0-1ubuntu24.04_all.deb ~/jdbc
 
-# # Container로 JDBC 드라이버 전송
-# docker cp ~/jdbc/usr/share/java/mysql-connector-j-8.4.0.jar kafka-connect1:/usr/share/confluent-hub-components/confluentinc-kafka-connect-jdbc/lib/
-# docker cp ~/jdbc/usr/share/java/mysql-connector-j-8.4.0.jar kafka-connect2:/usr/share/confluent-hub-components/confluentinc-kafka-connect-jdbc/lib/
 
-# docker restart kafka-connect1
-# docker restart kafka-connect2
+# # # Container로 JDBC 드라이버 전송
+docker cp ~/jdbc/usr/share/java/mysql-connector-j-8.4.0.jar kafka-connect1:/usr/share/confluent-hub-components/confluentinc-kafka-connect-jdbc/lib/
+docker cp ~/jdbc/usr/share/java/mysql-connector-j-8.4.0.jar kafka-connect2:/usr/share/confluent-hub-components/confluentinc-kafka-connect-jdbc/lib/
+
+docker restart kafka-connect1
+docker restart kafka-connect2
