@@ -21,7 +21,7 @@ services:
       CONFLUENT_MONITORING_INTERCEPTOR_BOOTSTRAP_SERVERS: "broker1:9093,broker2:9094,broker3:9095"
       CONFLUENT_MONITORING_INTERCEPTOR_TOPIC: "_confluent-monitoring"
       KSQL_INTERNAL_TOPIC_REPLICAS: "3"
-      KSQL_SCHEMA_REGISTRY_URL: "http://schema-registry1:8081,http://schema-registry2:8082"
+      KSQL_SCHEMA_REGISTRY_URL: "http://schema-registry1:8081,http://schema-registry2:8081"
       KSQL_STREAMS_REPLICATION_FACTOR: "3"
       KSQL_STREAMS_STATE_DIR: "/data/ksql"
       KSQL_LOGGING_PROCESSING_TOPIC_AUTO_CREATE: "true"

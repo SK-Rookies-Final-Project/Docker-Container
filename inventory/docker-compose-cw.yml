@@ -36,9 +36,9 @@ services:
       CONNECT_CONFLUENT_LICENSE_TOPIC: '_confluent-command'
       CONNECT_MONITORING_INTERCEPTOR_TOPIC: '_confluent-monitoring'
       CONNECT_KEY_CONVERTER: io.confluent.connect.avro.AvroConverter
-      CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry1:8081,http://schema-registry2:8082
+      CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry1:8081,http://schema-registry2:8081
       CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
-      CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry1:8081,http://schema-registry2:8082
+      CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry1:8081,http://schema-registry2:8081
       CLASSPATH: /usr/share/java/monitoring-interceptors/monitoring-interceptors-7.7.1.jar
       CONNECT_PRODUCER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringProducerInterceptor"
       CONNECT_CONSUMER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor"
@@ -75,9 +75,9 @@ services:
       CONNECT_CONFLUENT_LICENSE_TOPIC: '_confluent-command'
       CONNECT_MONITORING_INTERCEPTOR_TOPIC: '_confluent-monitoring'
       CONNECT_KEY_CONVERTER: io.confluent.connect.avro.AvroConverter
-      CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry1:8081,http://schema-registry2:8082
+      CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry1:8081,http://schema-registry2:8081
       CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
-      CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry1:8081,http://schema-registry2:8082
+      CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry1:8081,http://schema-registry2:8081
       CLASSPATH: /usr/share/java/monitoring-interceptors/monitoring-interceptors-7.7.1.jar
       CONNECT_PRODUCER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringProducerInterceptor"
       CONNECT_CONSUMER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor"
