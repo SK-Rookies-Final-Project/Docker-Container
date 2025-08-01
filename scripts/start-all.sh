@@ -13,6 +13,14 @@ wait_for_kafka_ready() {
   until docker exec broker1 kafka-topics --bootstrap-server broker1:29092 --list &>/dev/null; do
     sleep 10
   done
+
+  until docker exec broker2 kafka-topics --bootstrap-server broker2:39092 --list &>/dev/null; do
+    sleep 10
+  done
+
+  until docker exec broker3 kafka-topics --bootstrap-server broker1:49092 --list &>/dev/null; do
+    sleep 10
+  done
   echo "✅ Kafka metadata is available!"
 }
 
