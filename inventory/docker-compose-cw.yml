@@ -13,8 +13,6 @@ services:
     volumes:
       - ../scripts/connect-worker:/home/appuser
 
-    command: ["sh", "/home/appuser/scripts.sh"]
-
     environment:
       CONNECT_BOOTSTRAP_SERVERS: 'broker1:29092,broker2:39092,broker3:49092'
       CONNECT_REST_ADVERTISED_HOST_NAME: kafka-connect1
@@ -42,6 +40,8 @@ services:
       CONNECT_CONSUMER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor"
       CONNECT_PLUGIN_PATH: "/usr/share/java,/usr/share/confluent-hub-components"
       CONNECT_LOG4J_LOGGERS: org.apache.zookeeper=ERROR,org.I0Itec.zkclient=ERROR,org.reflections=ERROR
+
+
   kafka-connect2:
     image: confluentinc/cp-kafka-connect:7.7.1
     container_name: kafka-connect2
@@ -52,7 +52,6 @@ services:
     volumes:
       - ../scripts/connect-worker:/home/appuser
 
-    command: ["sh", "/home/appuser/scripts.sh"]
     environment:
       CONNECT_BOOTSTRAP_SERVERS: 'broker1:29092,broker2:39092,broker3:49092'
       CONNECT_REST_ADVERTISED_HOST_NAME: kafka-connect2
