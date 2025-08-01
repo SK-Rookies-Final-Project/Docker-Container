@@ -18,8 +18,8 @@ services:
       KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
       KAFKA_LISTENERS: 'CONTROLLER://controller1:9093'
       CLUSTER_ID: 'MkU3OEVBNTcwNTJENDM2Qk'
-      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: 'broker1:9093,broker2:9094,broker3:9095'
-      KAFKA_CONFLUENT_SCHEMA_REGISTRY_URL: 'http://schema-registry1:8081,http://schema-registry2:8081'
+      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: 'broker1:29092,broker2:39092,broker3:49092'
+      KAFKA_CONFLUENT_SCHEMA_REGISTRY_URL: 'http://schema-registry1:8081,http://schema-registry2:8082'
 
   controller2:
     container_name: controller2
@@ -36,8 +36,8 @@ services:
       KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
       KAFKA_LISTENERS: 'CONTROLLER://controller2:9094'
       CLUSTER_ID: 'MkU3OEVBNTcwNTJENDM2Qk'
-      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: 'broker1:9093,broker2:9094,broker3:9095'
-      KAFKA_CONFLUENT_SCHEMA_REGISTRY_URL: 'http://schema-registry1:8081,http://schema-registry2:8081'
+      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: 'broker1:29092,broker2:39092,broker3:49092'
+      KAFKA_CONFLUENT_SCHEMA_REGISTRY_URL: 'http://schema-registry1:8081,http://schema-registry2:8082'
 
   controller3:
     hostname: controller3
@@ -54,5 +54,5 @@ services:
       KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
       KAFKA_LISTENERS: 'CONTROLLER://controller3:9095'
       CLUSTER_ID: 'MkU3OEVBNTcwNTJENDM2Qk'
-      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: 'broker1:9093,broker2:9094,broker3:9095'
-      KAFKA_CONFLUENT_SCHEMA_REGISTRY_URL: 'http://schema-registry1:8081,http://schema-registry2:8081'
+      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: 'broker1:29093,broker2:39092,broker3:49092'
+      KAFKA_CONFLUENT_SCHEMA_REGISTRY_URL: 'http://schema-registry1:8081,http://schema-registry2:8082'
