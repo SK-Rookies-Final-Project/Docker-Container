@@ -68,11 +68,3 @@ wget https://downloads.mysql.com/archives/get/p/3/file/mysql-connector-j_8.4.0-1
 
 # .deb 패키지 설치
 dpkg -x mysql-connector-j_8.4.0-1ubuntu24.04_all.deb ~/jdbc
-
-
-# Container로 JDBC 드라이버 전송
-# docker cp ~/jdbc/usr/share/java/mysql-connector-j-8.4.0.jar kafka-connect1:/usr/share/confluent-hub-components/confluentinc-kafka-connect-jdbc/lib/
-# docker cp ~/jdbc/usr/share/java/mysql-connector-j-8.4.0.jar kafka-connect2:/usr/share/confluent-hub-components/confluentinc-kafka-connect-jdbc/lib/
-
-# docker restart kafka-connect1
-# docker restart kafka-connect2
