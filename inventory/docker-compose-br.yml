@@ -8,7 +8,6 @@ networks:
 services:
   broker1:
     hostname: broker1
-    container_name: broker1
     image: confluentinc/cp-server:7.7.1
     networks:
       - kafka-network
@@ -34,7 +33,6 @@ services:
 
   broker2:
     hostname: broker2
-    container_name: broker2
     image: confluentinc/cp-server:7.7.1
     networks:
       - kafka-network
@@ -58,7 +56,6 @@ services:
 
   broker3:
     hostname: broker3
-    container_name: broker3
     image: confluentinc/cp-server:7.7.1
     networks:
       - kafka-network

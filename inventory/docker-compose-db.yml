@@ -8,7 +8,6 @@ services:
   ksqldb:
     image: confluentinc/cp-ksqldb-server:7.7.1
     hostname: ksqldb
-    container_name: ksqldb
     networks:
       - kafka-network
     ports:
@@ -31,7 +30,7 @@ services:
 
   ksqldb-cli:
     image: confluentinc/cp-ksqldb-cli:7.7.1
-    container_name: ksqldb-cli
+    hostname: ksqldb-cli
     networks:
       - kafka-network
     depends_on:

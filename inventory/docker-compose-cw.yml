@@ -7,7 +7,6 @@ services:
   kafka-connect1:
     image: confluentinc/cp-kafka-connect:7.7.1
     hostname: kafka-connect1
-    container_name: kafka-connect1
     networks:
       - kafka-network
     ports:
@@ -47,7 +46,6 @@ services:
   kafka-connect2:
     image: confluentinc/cp-kafka-connect:7.7.1
     hostname: kafka-connect2
-    container_name: kafka-connect2
     networks:
       - kafka-network
     ports:
