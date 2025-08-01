@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /home/appuser/jdbc
+cd /home/ubuntu/jdbc
 # Kafka Connect 설정 파일 생성 스크립트
 
 # JDBC MySQL Source 커넥터 설정 파일 생성
