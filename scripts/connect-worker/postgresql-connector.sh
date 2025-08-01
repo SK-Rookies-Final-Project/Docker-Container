@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sh create-connector.sh /home/ubuntu/jdbc/jdbc-postgre-sink-test.json
+sh create-connector.sh ~/jdbc/jdbc-postgre-sink-test.json

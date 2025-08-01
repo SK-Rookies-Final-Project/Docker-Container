@@ -1,6 +1,6 @@
 #!/bin/bash
 mkdir -p ~/jdbc
-cd /home/ubuntu/jdbc
+cd ~/jdbc
 # Kafka Connect 설정 파일 생성 스크립트
 
 # JDBC MySQL Source 커넥터 설정 파일 생성
