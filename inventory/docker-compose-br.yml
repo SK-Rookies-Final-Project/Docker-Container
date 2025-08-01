@@ -14,7 +14,7 @@ services:
       - kafka-network
     ports:
       - 29092:29092
-    volume:
+    volumes:
       - ../volume/broker:/home/appuser
     environment:
       KAFKA_NODE_ID: 1

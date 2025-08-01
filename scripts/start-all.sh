@@ -24,9 +24,9 @@ echo "✅ Step 2: Starting Kafka Brokers (broker1~3)..."
 docker compose -f ../inventory/docker-compose-br.yml up -d
 
 # Wait for Kafka brokers to be ready
-wait_for_kafka 18.220.17.107 29092
-wait_for_kafka 18.220.17.107 39092
-wait_for_kafka 18.220.17.107 49092
+wait_for_kafka localhost 29092
+wait_for_kafka localhost 39092
+wait_for_kafka localhost 49092
 
 wait_for_kafka_ready
 
