@@ -14,6 +14,9 @@ services:
       - "18083:8083"
     volumes:
       - ../scripts/connect-worker:/home/appuser
+
+    command: ["sh", "/home/appuser/scripts.sh"]
+
     environment:
       CONNECT_BOOTSTRAP_SERVERS: 'broker1:29092,broker2:39092,broker3:49092'
       CONNECT_REST_ADVERTISED_HOST_NAME: kafka-connect1
@@ -51,6 +54,8 @@ services:
       - "18084:8083"
     volumes:
       - ../scripts/connect-worker:/home/appuser
+
+    command: ["sh", "/home/appuser/scripts.sh"]
     environment:
       CONNECT_BOOTSTRAP_SERVERS: 'broker1:29092,broker2:39092,broker3:49092'
       CONNECT_REST_ADVERTISED_HOST_NAME: kafka-connect2
