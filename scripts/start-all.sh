@@ -21,6 +21,7 @@ wait_for_kafka_ready() {
   until docker exec broker3 kafka-topics --bootstrap-server broker3:49092 --list &>/dev/null; do
     sleep 10
   done
+
   echo "✅ Kafka metadata is available!"
 }
 
@@ -46,7 +47,6 @@ sleep 20
 echo "✅ Step 4: Starting Schema Registry (schema-registry1, schema-registry2)..."
 docker compose -f ../inventory/docker-compose-sr.yml up -d
 sleep 15
-
 
 echo "✅ Step 5: Starting ksqlDB (ksqldb, ksqldb-cli)..."
 docker compose -f ../inventory/docker-compose-db.yml up -d

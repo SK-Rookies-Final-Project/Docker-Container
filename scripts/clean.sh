@@ -3,8 +3,7 @@
 echo "Docker 전체 정리 중..."
 
 # 모든 컨테이너 중지 및 삭제
-docker stop $(docker ps -q) 2>/dev/null
-docker rm $(docker ps -aq) 2>/dev/null
+sh ./down.sh
 
 # 모든 이미지 삭제
 docker rmi -f $(docker images -q) 2>/dev/null
