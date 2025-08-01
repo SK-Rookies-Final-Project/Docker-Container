@@ -1,4 +1,5 @@
 #!/bin/bash
+mkdir -p ~/jdbc
 cd /home/ubuntu/jdbc
 # Kafka Connect 설정 파일 생성 스크립트
 
