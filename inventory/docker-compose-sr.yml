@@ -1,5 +1,3 @@
-name: kafka-project
-
 networks:
   kafka-network:
     driver: bridge
@@ -7,8 +5,8 @@ networks:
 services:
   schema-registry1:
     image: confluentinc/cp-schema-registry:7.7.1
-    hostname: schema-registry1
     container_name: schema-registry1
+    
     networks:
       - kafka-network
     ports:
@@ -23,7 +21,6 @@ services:
 
   schema-registry2:
     image: confluentinc/cp-schema-registry:7.7.1
-    hostname: schema-registry2
     container_name: schema-registry2
     networks:
       - kafka-network

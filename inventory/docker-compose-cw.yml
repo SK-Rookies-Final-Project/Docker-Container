@@ -1,4 +1,3 @@
-name: kafka-project
 networks:
   kafka-network:
     driver: bridge
@@ -6,7 +5,6 @@ networks:
 services:
   kafka-connect1:
     image: confluentinc/cp-kafka-connect:7.7.1
-    hostname: kafka-connect1
     container_name: kafka-connect1
     networks:
       - kafka-network
@@ -14,6 +12,7 @@ services:
       - "18083:8083"
     volumes:
       - ../scripts/connect-worker:/home/appuser
+
     environment:
       CONNECT_BOOTSTRAP_SERVERS: 'broker1:29092,broker2:39092,broker3:49092'
       CONNECT_REST_ADVERTISED_HOST_NAME: kafka-connect1
@@ -41,9 +40,10 @@ services:
       CONNECT_CONSUMER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor"
       CONNECT_PLUGIN_PATH: "/usr/share/java,/usr/share/confluent-hub-components"
       CONNECT_LOG4J_LOGGERS: org.apache.zookeeper=ERROR,org.I0Itec.zkclient=ERROR,org.reflections=ERROR
+
+
   kafka-connect2:
     image: confluentinc/cp-kafka-connect:7.7.1
-    hostname: kafka-connect2
     container_name: kafka-connect2
     networks:
       - kafka-network
@@ -51,6 +51,7 @@ services:
       - "18084:8083"
     volumes:
       - ../scripts/connect-worker:/home/appuser
+
     environment:
       CONNECT_BOOTSTRAP_SERVERS: 'broker1:29092,broker2:39092,broker3:49092'
       CONNECT_REST_ADVERTISED_HOST_NAME: kafka-connect2
