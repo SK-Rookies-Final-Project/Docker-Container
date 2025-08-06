@@ -19,7 +19,7 @@ services:
       KAFKA_LISTENERS: 'PLAINTEXT://0.0.0.0:29092'
       KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://ec2-18-189-168-183.us-east-2.compute.amazonaws.com:29092' #DNS 로 고쳐야함 클러스터1(서울)이랑 Link위해
       KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT'
-      KAFKA_CONTROLLER_QUORUM_VOTERS: '101@controller1:9093,102@controller2:9094,103@controaller3:9095'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '101@controller1:9093,102@controller2:9094,103@controller3:9095'
       KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
       KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
       CLUSTER_ID: 'MkU3OEVBNTcwNTJENDM2Qk'
