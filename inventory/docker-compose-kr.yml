@@ -40,6 +40,7 @@ services:
       KAFKA_CONFLUENT_SCHEMA_REGISTRY_URL: 'http://schema-registry1:8081,http://schema-registry2:8082'
 
   controller3:
+    container_name: controller3
     hostname: controller3
     image: confluentinc/cp-server:7.7.1
     networks:
